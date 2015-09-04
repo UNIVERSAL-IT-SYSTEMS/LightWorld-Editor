@@ -41,7 +41,13 @@ local world = {}
 function love.load()
     lw = LightWorld()
 
-    lf.Create("frame")
+    local frame = lf.Create("frame"):SetName("World Optons"):SetSize(350, 175):ShowCloseButton(false)
+    local grid = lf.Create("grid", frame):SetPos(5, 30):SetCellWidth(320/2)
+    grid:SetRows(4):SetColumns(2):SetItemAutoSize(true)
+    local savefile = lf.Create("textinput"):SetPlaceholderText("File to save or load from.")
+    grid:AddItem(savefile, 1, 1)
+    local load_button = lf.Create("button", frame):SetText("Load"):SetPos(180, 35)
+    local save_button = lf.Create("button", frame):SetText("Save"):SetPos(260, 35)
 end
 
 function love.update(dt)
@@ -79,6 +85,10 @@ end
 
 function love.mousepressed(x, y, button)
     lf.mousepressed(x, y, button)
+
+    if lf.util.GetHoverObject() == false then
+        --[[now we can start creating something]]
+    end
 end
 
 function love.mousereleased(x, y, button)
